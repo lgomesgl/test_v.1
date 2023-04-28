@@ -9,12 +9,12 @@ class ProjetoModelForm(forms.ModelForm):
         fields = ['Nome do projeto']
         
 # Empresas
-# class EmpresasModelForm(forms.ModelForm):
-#     class Meta:
-#         model = Empresas
-#         fields = ['Nome da empresa', 'projetos']
+class EmpresasModelForm(forms.ModelForm):
+    class Meta:
+        model = Empresas
+        fields = ['Nome da empresa', 'projetos']
         
-#     projetos = forms.ModelMultipleChoiceField(
-#         queryset = Projeto.objects.all(),
-#         widget = forms.CheckboxSelectMultiple
-#     )
+    projetos = forms.ModelMultipleChoiceField(
+        queryset = Projeto.objects.all(),
+        widget = forms.CheckboxSelectMultiple
+    )
