@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core',
     'bootstrap4',
     'stdimage',
+    'django_forms_bootstrap',
 ]
 
 MIDDLEWARE = [
