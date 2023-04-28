@@ -14,9 +14,14 @@ class EmpresasModelForm(forms.ModelForm):
         model = Empresas
         fields = ['Nome da empresa', 'projetos']
         
+    if Projeto.objects.all().count() < 5: # if size of the table is bigger then 5 choices, default the
+        widget = forms.CheckboxSelectMultiple
+    else:
+        widget = False
+    
     projetos = forms.ModelMultipleChoiceField(
         queryset = Projeto.objects.all(),
-        widget = forms.CheckboxSelectMultiple
+        widget = widget 
     )
     
 # Pessoas

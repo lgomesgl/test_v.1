@@ -12,8 +12,8 @@ class Base(models.Model):
 class Projeto(Base):
     nome = models.CharField(name='Nome do projeto', max_length=100, unique=True)
     
-    #def __str__(self): # why is not working?????
-        #return self.nome
+    #def __repl__(self): # why is not working?????
+        #return print(self.nome)
       
 class Empresas(Base):
     nome = models.CharField(name='Nome da empresa', max_length=100, unique=True)
