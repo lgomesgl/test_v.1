@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 
-from .forms import ProjetoModelForm, EmpresasModelForm
+from .forms import ProjetoModelForm, EmpresasModelForm, PessoasModelForm
 
 # Create your views here.
 def index(request):
@@ -46,4 +46,20 @@ def empresas(request):
     return render(request, 'empresas.html', context)
 
 def pessoas(request):
-    return render(request, 'pessoas.html')
+    if str(request.method) == 'POST': # se o método for POST
+        form = PessoasModelForm(request.POST or None)
+        if form.is_valid(): # validando o formulario
+            form.save() # colocando os dados no banco de dados
+            
+            messages.success(request, 'Nova pessoa cadastrada')
+            form = PessoasModelForm() # deixando o formulario em branco
+        else:
+            messages.error(request, 'ERRO')
+    else:
+        form = PessoasModelForm() # deixando o formulario em branco
+        
+    context = { # o que vai ser levado para o .html
+        'form': form 
+    } 
+        
+    return render(request, 'pessoas.html', context)

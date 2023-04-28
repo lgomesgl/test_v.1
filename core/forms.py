@@ -1,5 +1,5 @@
 from django import forms
-from .models import Projeto, Empresas
+from .models import Projeto, Empresas, Pessoas
 
 # Create the forms
 # Projeto
@@ -18,3 +18,14 @@ class EmpresasModelForm(forms.ModelForm):
         queryset = Projeto.objects.all(),
         widget = forms.CheckboxSelectMultiple
     )
+    
+# Pessoas
+class PessoasModelForm(forms.ModelForm):
+    class Meta:
+        model = Pessoas
+        fields = ['Nome', 'Sexo', 'Cargo', 'projetos']
+        
+    projetos = forms.ModelMultipleChoiceField(
+        queryset = Projeto.objects.all(),
+        widget = forms.CheckboxSelectMultiple
+    )                                                                                                                                                                                                                                                                                                                                                                                                                                       
