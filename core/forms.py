@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models.base import Model
 from .models import Projeto, Empresas, Pessoas
 
 # Create the forms
@@ -6,8 +7,13 @@ from .models import Projeto, Empresas, Pessoas
 class ProjetoModelForm(forms.ModelForm):
     class Meta:
         model = Projeto
-        fields = ['Nome do projeto']
-        
+        fields = ['Nome do projeto','Data de término']
+ 
+# try to fix the def __str__ from Projeto model
+# class CustomMMCF(forms.ModelChoiceField):
+#     def label_from_instance(self, projeto):
+#         return "%s" % projeto.nome
+            
 # Empresas
 class EmpresasModelForm(forms.ModelForm):
     class Meta:
@@ -30,7 +36,12 @@ class PessoasModelForm(forms.ModelForm):
         model = Pessoas
         fields = ['Nome', 'Sexo', 'Cargo', 'projetos']
         
+    if int(Projeto.objects.all().count()) < 5: # if size of the table is bigger then 5 choices, default the
+        widget = forms.CheckboxSelectMultiple
+    else:
+        widget = None
+        
     projetos = forms.ModelMultipleChoiceField(
         queryset = Projeto.objects.all(),
-        widget = forms.CheckboxSelectMultiple
+        widget = widget
     )                                                                                                                                                                                                                                                                                                                                                                                                                                       

@@ -11,6 +11,7 @@ class Base(models.Model):
         
 class Projeto(Base):
     nome = models.CharField(name='Nome do projeto', max_length=100, unique=True)
+    data_over = models.DateField(name='Data de término', null=True, blank=True)
     
     #def __str__(self): # why is not working?????
         #return self.nome
@@ -18,6 +19,9 @@ class Projeto(Base):
 class Empresas(Base):
     nome = models.CharField(name='Nome da empresa', max_length=100, unique=True)
     projeto = models.ManyToManyField(Projeto)
+    
+    #def __str__(self):
+        #return self.nome
     
 class Pessoas(Base):
     SEXO = [
@@ -38,5 +42,7 @@ class Pessoas(Base):
     sexo = models.CharField(name='Sexo', max_length=1, choices=SEXO)
     cargo = models.CharField(name='Cargo', max_length=100, choices=CARGOS)
     projeto = models.ManyToManyField(Projeto)
+    
+   
     
     
