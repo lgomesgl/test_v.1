@@ -1,65 +1,65 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView, FormView
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
+from .models import Projeto, Pessoas, Empresas
 from .forms import ProjetoModelForm, EmpresasModelForm, PessoasModelForm
 
-# Create your views here.
-def index(request):
-    return render(request, 'index.html')
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-def projetos(request):
-    if str(request.method) == 'POST': # se o método for POST
-        form = ProjetoModelForm(request.POST or None)
-        if form.is_valid(): # validando o formulario
-            form.save() # colocando os dados no banco de dados
-            
-            messages.success(request, 'Novo projeto cadastrado')
-            form = ProjetoModelForm() # deixando o formulario em branco
-        else:
-            messages.error(request, 'ERRO')
-    else:
-        form = ProjetoModelForm() # deixando o formulario em branco
-        
-    context = { # o que vai ser levado para o .html
-        'form': form 
-    }  
-        
-    return render(request, 'projetos.html', context)
+class ProjetosView(FormView):
+    template_name = 'projetos.html' 
+    form_class = ProjetoModelForm 
+    success_url = reverse_lazy('projetos') # aonde vai ser redirecionado se o formulario tiver sucesso
 
-def empresas(request):
-    if str(request.method) == 'POST': # se o método for POST
-        form = EmpresasModelForm(request.POST or None)
-        if form.is_valid(): # validando o formulario
-            form.save() # colocando os dados no banco de dados
-            
-            messages.success(request, 'Nova empresa cadastrada')
-            form = EmpresasModelForm() # deixando o formulario em branco
-        else:
-            messages.error(request, 'ERRO')
-    else:
-        form = EmpresasModelForm() # deixando o formulario em branco
-        
-    context = { # o que vai ser levado para o .html
-        'form': form 
-    }  
-      
-    return render(request, 'empresas.html', context)
+    def get_context_data(self): # contexto para a pagina html
+        context = super().get_context_data()
+        return context
 
-def pessoas(request):
-    if str(request.method) == 'POST': # se o método for POST
-        form = PessoasModelForm(request.POST or None)
-        if form.is_valid(): # validando o formulario
-            form.save() # colocando os dados no banco de dados
-            
-            messages.success(request, 'Nova pessoa cadastrada')
-            form = PessoasModelForm() # deixando o formulario em branco
-        else:
-            messages.error(request, 'ERRO')
-    else:
-        form = PessoasModelForm() # deixando o formulario em branco
-        
-    context = { # o que vai ser levado para o .html
-        'form': form 
-    } 
-        
-    return render(request, 'pessoas.html', context)
+    def form_valid(self, form): # se o formulario for valido
+        form.save() # salvando o formulario no banco de dados
+        messages.success(self.request, 'Novo Projeto cadastrado') # mensagem de sucesso
+        return super().form_valid(form)
+    
+    def form_invalid(self, form): # se o formulario não for válido
+        messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
+        return super().form_invalid(form)
+
+class EmpresasView(FormView):
+    template_name = 'empresas.html' 
+    form_class = EmpresasModelForm 
+    success_url = reverse_lazy('empresas') # aonde vai ser redirecionado se o formulario tiver sucesso
+
+    def get_context_data(self): # contexto para a pagina html
+        context = super().get_context_data()
+        return context
+
+    def form_valid(self, form): # se o formulario for valido
+        form.save() # salvando o formulario no banco de dados
+        messages.success(self.request, 'Nova Empresa cadastrada') # mensagem de sucesso
+        return super().form_valid(form)
+    
+    def form_invalid(self, form): # se o formulario não for válido
+        messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
+        return super().form_invalid(form)
+
+class PessoasView(FormView):
+    template_name = 'pessoas.html' 
+    form_class = PessoasModelForm 
+    success_url = reverse_lazy('pessoas') # aonde vai ser redirecionado se o formulario tiver sucesso
+
+    def get_context_data(self): # contexto para a pagina html
+        context = super().get_context_data()
+        return context
+
+    def form_valid(self, form): # se o formulario for valido
+        form.save() # salvando o formulario no banco de dados
+        messages.success(self.request, 'Nova Pessoa cadastrada') # mensagem de sucesso
+        return super().form_valid(form)
+    
+    def form_invalid(self, form): # se o formulario não for válido
+        messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
+        return super().form_invalid(form)
+    

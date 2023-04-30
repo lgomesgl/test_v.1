@@ -1,5 +1,4 @@
 from django import forms
-from django.db.models.base import Model
 from .models import Projeto, Empresas, Pessoas
 
 # Create the forms
