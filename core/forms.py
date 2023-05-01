@@ -2,7 +2,6 @@ from django import forms
 from .models import Projeto, Empresas, Pessoas
 
 # Create the forms
-# Projeto
 class ProjetoModelForm(forms.ModelForm):
     class Meta:
         model = Projeto
@@ -13,7 +12,6 @@ class ProjetoModelForm(forms.ModelForm):
 #     def label_from_instance(self, projeto):
 #         return "%s" % projeto.nome
             
-# Empresas
 class EmpresasModelForm(forms.ModelForm):
     class Meta:
         model = Empresas
@@ -29,7 +27,6 @@ class EmpresasModelForm(forms.ModelForm):
         widget = widget 
     )
     
-# Pessoas
 class PessoasModelForm(forms.ModelForm):
     class Meta:
         model = Pessoas
