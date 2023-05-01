@@ -7,6 +7,14 @@ from .forms import ProjetoModelForm, EmpresasModelForm, PessoasModelForm
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+    
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['link_admin'] = '/admin'
+        context['link_projetos_form'] = '/projetos'
+        context['link_empresas_form'] = '/empresas'
+        context['link_pessoas_form'] = '/pessoas'
+        return context
 
 class ProjetosView(FormView):
     template_name = 'projetos.html' 
