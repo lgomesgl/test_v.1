@@ -10,15 +10,23 @@ class Base(models.Model):
         abstract = True # deixando a classe abstrata.
         
 class Projeto(Base):
-    nome = models.CharField(name='Nome do projeto', max_length=100, unique=True)
+    nome = models.CharField(max_length=100, unique=True)
     data_over = models.DateField(name='Data de término', null=True, blank=True)
     
-    #def __str__(self): # why is not working?????
-        #return self.nome
+    class Meta:
+        verbose_name = 'Projeto'
+        verbose_name_plural = 'Projetos'
+    
+    def __str__(self): # why is not working????? -- WORK: NO method name in models.CharField
+        return self.nome
       
 class Empresas(Base):
     nome = models.CharField(name='Nome da empresa', max_length=100, unique=True)
     projeto = models.ManyToManyField(Projeto)
+    
+    class Meta:
+        verbose_name = 'Empresa'
+        verbose_name_plural = 'Empresas'
     
     #def __str__(self):
         #return self.nome
@@ -43,6 +51,10 @@ class Pessoas(Base):
     cargo = models.CharField(name='Cargo', max_length=100, choices=CARGOS)
     projeto = models.ManyToManyField(Projeto)
     
-   
-    
+    class Meta:
+        verbose_name = 'Pessoa'
+        verbose_name_plural = 'Pessoas'
+        
+    #def __str__(self):
+        #return self.nome
     

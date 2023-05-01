@@ -4,7 +4,7 @@ from .models import Projeto, Empresas, Pessoas
 # Register your models here.
 @admin.register(Projeto)
 class ProjetoAdmin(admin.ModelAdmin):
-    list_display = ['Nome do projeto', 'Data de término', 'Dia de criação']
+    list_display = ['nome', 'Data de término', 'Dia de criação']
     
 @admin.register(Empresas)
 class EmpresasAdmin(admin.ModelAdmin):

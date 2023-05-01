@@ -1,10 +1,14 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, UpdateView
 from django.contrib import messages
 
 from django.urls import reverse_lazy
 
 from .forms import ProjetoModelForm, EmpresasModelForm, PessoasModelForm
-
+from .models import Projeto, Empresas, Pessoas
+'''
+    The relationship is not been save. Why?? 
+    save_m2m() is not working??
+'''
 class IndexView(TemplateView):
     template_name = 'index.html'
     
@@ -22,17 +26,19 @@ class ProjetosView(FormView):
     success_url = reverse_lazy('projetos') # aonde vai ser redirecionado se o formulario tiver sucesso
 
     def get_context_data(self): # contexto para a pagina html
-        context = super().get_context_data()
+        context = super(ProjetosView, self).get_context_data()
         return context
 
     def form_valid(self, form): # se o formulario for valido
-        form.save() # salvando o formulario no banco de dados
+        inst_ = form.save(commit=False) # salvando o formulario no banco de dados
+        inst_.save()
+        form.save_m2m() 
         messages.success(self.request, 'Novo Projeto cadastrado') # mensagem de sucesso
-        return super().form_valid(form)
+        return super(ProjetosView, self).form_valid(form)
     
     def form_invalid(self, form): # se o formulario não for válido
         messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
-        return super().form_invalid(form)
+        return super(ProjetosView, self).form_invalid(form)
 
 class EmpresasView(FormView):
     template_name = 'empresas.html' 
@@ -40,17 +46,19 @@ class EmpresasView(FormView):
     success_url = reverse_lazy('empresas') # aonde vai ser redirecionado se o formulario tiver sucesso
 
     def get_context_data(self): # contexto para a pagina html
-        context = super().get_context_data()
+        context = super(EmpresasView, self).get_context_data()
         return context
 
     def form_valid(self, form): # se o formulario for valido
-        form.save() # salvando o formulario no banco de dados
+        inst_ = form.save(commit=False) # salvando o formulario no banco de dados
+        inst_.save()
+        form.save_m2m()
         messages.success(self.request, 'Nova Empresa cadastrada') # mensagem de sucesso
-        return super().form_valid(form)
+        return super(EmpresasView, self).form_valid(form)
     
     def form_invalid(self, form): # se o formulario não for válido
         messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
-        return super().form_invalid(form)
+        return super(EmpresasView, self).form_invalid(form)
 
 class PessoasView(FormView):
     template_name = 'pessoas.html' 
@@ -58,15 +66,17 @@ class PessoasView(FormView):
     success_url = reverse_lazy('pessoas') # aonde vai ser redirecionado se o formulario tiver sucesso
 
     def get_context_data(self): # contexto para a pagina html
-        context = super().get_context_data()
+        context = super(PessoasView, self).get_context_data()
         return context
 
     def form_valid(self, form): # se o formulario for valido
-        form.save() # salvando o formulario no banco de dados
+        inst_ = form.save(commit=False) # salvando o formulario no banco de dados
+        inst_.save()
+        form.save_m2m()
         messages.success(self.request, 'Nova Pessoa cadastrada') # mensagem de sucesso
-        return super().form_valid(form)
+        return super(PessoasView, self).form_valid(form)
     
     def form_invalid(self, form): # se o formulario não for válido
         messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
-        return super().form_invalid(form)
+        return super(PessoasView, self).form_invalid(form)
     

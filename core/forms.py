@@ -5,7 +5,7 @@ from .models import Projeto, Empresas, Pessoas
 class ProjetoModelForm(forms.ModelForm):
     class Meta:
         model = Projeto
-        fields = ['Nome do projeto','Data de término']
+        fields = ['nome','Data de término']
  
 # try to fix the def __str__ from Projeto model
 # class CustomMMCF(forms.ModelChoiceField):
