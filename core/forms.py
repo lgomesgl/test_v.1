@@ -6,11 +6,6 @@ class ProjetoModelForm(forms.ModelForm):
     class Meta:
         model = Projeto
         fields = ['nome','Data de término']
- 
-# try to fix the def __str__ from Projeto model
-# class CustomMMCF(forms.ModelChoiceField):
-#     def label_from_instance(self, projeto):
-#         return "%s" % projeto.nome
             
 class EmpresasModelForm(forms.ModelForm):
     class Meta:
