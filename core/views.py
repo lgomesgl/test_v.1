@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, CreateView
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.urls import reverse_lazy
@@ -25,6 +26,18 @@ class IndexTemplateView(TemplateView):
         return context
 
 # CreateView -> Create a new instance in the table
+
+'''
+    View to input new usuariso in database (from django.contrib.auth.models import User)
+    User is the database of usuarios from django
+    Columns : Usuario, Senha, Nome, Sobrenome, Email, Autorizações de tabelas?
+'''
+# class CreateUserCreateView(LoginRequiredMixin, CreateView):
+#     template_name = 'create_user.html'
+#     model = User
+#     # form_class = CreateUserModelForm
+#     success_url = reverse_lazy('create_user')
+
 class ProjetosCreateView(LoginRequiredMixin, CreateView): 
     template_name = 'projetos.html' 
     model = Projeto
