@@ -6,7 +6,18 @@ class ProjetoModelForm(forms.ModelForm):
     class Meta:
         model = Projeto
         fields = ['nome','Data de término']
-            
+        
+    # def save(self, commit=True):
+    #     user = super(ProjetoModelForm, self).save(commit=False)
+    #     if commit:
+    #         user.save()
+    #         self.save_m2m()
+    #     return user
+    
+    # def save(self):
+    #     user = super(ProjetoModelForm, self).save()
+    #     user.save()
+        
 class EmpresasModelForm(forms.ModelForm):
     class Meta:
         model = Empresas
@@ -22,6 +33,10 @@ class EmpresasModelForm(forms.ModelForm):
         widget = widget 
     )
     
+    # def save(self):
+    #     user = super(EmpresasModelForm, self).save()
+    #     user.save()
+    
 class PessoasModelForm(forms.ModelForm):
     class Meta:
         model = Pessoas
@@ -32,7 +47,14 @@ class PessoasModelForm(forms.ModelForm):
     else:
         widget = None
         
-    projetos = forms.ModelMultipleChoiceField(
+    projetos = forms.ModelMultipleChoiceField( # projetos field in form
         queryset = Projeto.objects.all(),
         widget = widget
-    )                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    )                
+    
+    # def save(self, commit=True):
+    #     user = super(PessoasModelForm, self).save(commit=False)
+    #     if commit:
+    #         user.save()
+    #         self.save_m2m()
+    #     return user                                                                                                                                                                                                                                                                                                                                                                                                                       
