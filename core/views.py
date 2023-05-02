@@ -18,6 +18,7 @@ class IndexTemplateView(TemplateView):
     def get_context_data(self): # contexto para a pagina html
         context = super().get_context_data()
         context['link_admin'] = '/admin'
+        context['link_create_user'] = '/create_user'
         context['link_projetos_form'] = '/projetos'
         context['link_empresas_form'] = '/empresas'
         context['link_pessoas_form'] = '/pessoas'
