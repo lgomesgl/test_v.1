@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, CreateView
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.urls import reverse_lazy
 
@@ -12,7 +13,7 @@ from .models import Projeto, Empresas, Pessoas
 class IndexView(TemplateView):
     template_name = 'index.html'
     
-    def get_context_data(self):
+    def get_context_data(self): # contexto para a pagina html
         context = super().get_context_data()
         context['link_admin'] = '/admin'
         context['link_projetos_form'] = '/projetos'
@@ -20,12 +21,12 @@ class IndexView(TemplateView):
         context['link_pessoas_form'] = '/pessoas'
         return context
 
-class ProjetosCreateView(CreateView): 
+class ProjetosCreateView(LoginRequiredMixin, CreateView): 
     template_name = 'projetos.html' 
     model = Projeto
     form_class = ProjetoModelForm 
     success_url = reverse_lazy('projetos') # aonde vai ser redirecionado se o formulario tiver sucesso
-
+    
     def get_context_data(self): # contexto para a pagina html
         context = super(ProjetosCreateView, self).get_context_data()
         return context
@@ -38,10 +39,15 @@ class ProjetosCreateView(CreateView):
         return super(ProjetosCreateView, self).form_valid(form)
     
     def form_invalid(self, form): # se o formulario não for válido
-        messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
+        messages.error(self.request, 'Erro - Preencha os dados obrigatórios!') # mensagem de erro
         return super(ProjetosCreateView, self).form_invalid(form)
 
-class EmpresasCreateView(CreateView):
+    def dispatch(self, request): # autenticação
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        return super().dispatch(request)
+
+class EmpresasCreateView(LoginRequiredMixin, CreateView):
     template_name = 'empresas.html' 
     model = Empresas
     form_class = EmpresasModelForm 
@@ -59,10 +65,15 @@ class EmpresasCreateView(CreateView):
         return super(EmpresasCreateView, self).form_valid(form)
     
     def form_invalid(self, form): # se o formulario não for válido
-        messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
+        messages.error(self.request, 'Erro - Preencha os dados obrigatórios!') # mensagem de erro
         return super(EmpresasCreateView, self).form_invalid(form)
 
-class PessoasCreateView(CreateView):
+    def dispatch(self, request): # autenticação
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        return super().dispatch(request)
+        
+class PessoasCreateView(LoginRequiredMixin, CreateView):
     template_name = 'pessoas.html' 
     model = Pessoas
     form_class = PessoasModelForm 
@@ -80,6 +91,10 @@ class PessoasCreateView(CreateView):
         return super(PessoasCreateView, self).form_valid(form)
     
     def form_invalid(self, form): # se o formulario não for válido
-        messages.error(self.request, 'Erro - Preencha todos os dados!') # mensagem de erro
+        messages.error(self.request, 'Erro - Preencha os dados obrigatórios!') # mensagem de erro
         return super(PessoasCreateView, self).form_invalid(form)
     
+    def dispatch(self, request): # autenticação
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        return super().dispatch(request)

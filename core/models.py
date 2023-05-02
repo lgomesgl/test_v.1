@@ -17,7 +17,7 @@ class Projeto(Base):
         verbose_name = 'Projeto'
         verbose_name_plural = 'Projetos'
     
-    def __str__(self): # why is not working????? -- WORK: NO method name in models.CharField
+    def __str__(self): # why is not working????? --> WORK: NO method (name) in models.CharField
         return self.nome
       
 class Empresas(Base):
