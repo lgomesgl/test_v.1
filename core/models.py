@@ -1,6 +1,12 @@
 from django.db import models
 
 # Create your models here.
+'''
+    1 models Base: 'Dia de criação' e 'Dia de modificação' (colunas comuns)
+    3 models : Projeto, Empresas, Pessoas
+
+    Próximo modelo -> Arquivos -> Alocação de arquivos BLOB por projetos
+'''
 # Create a Base model with some ordinary column.
 class Base(models.Model):
     date_creates = models.DateField(name='Dia de criação', auto_now_add=True) # auto_now_add: firts time are created

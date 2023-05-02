@@ -9,6 +9,8 @@ from .models import Projeto, Empresas, Pessoas
 '''
     The relationship is not been save. Why?? 
     save_m2m() is not working??
+    
+    Create a template for create new usuarios
 '''
 class IndexTemplateView(TemplateView):
     template_name = 'index.html'
