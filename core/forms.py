@@ -1,7 +1,13 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Projeto, Empresas, Pessoas
 
 # Create the forms
+# class CreateUserModelForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         # fields = ['']
+    
 class ProjetoModelForm(forms.ModelForm):
     class Meta:
         model = Projeto
