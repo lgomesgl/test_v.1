@@ -1,11 +1,12 @@
-from django.views.generic import TemplateView, CreateView
+from typing import Any, Dict
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView, CreateView
 
 from django.urls import reverse_lazy
 
-from .forms import ProjetoModelForm, EmpresasModelForm, PessoasModelForm
+from .forms import CreateUserModelForm, ProjetoModelForm, EmpresasModelForm, PessoasModelForm
 from .models import Projeto, Empresas, Pessoas
 '''
     The relationship is not been save. Why?? 
@@ -26,17 +27,20 @@ class IndexTemplateView(TemplateView):
         return context
 
 # CreateView -> Create a new instance in the table
-
 '''
-    View to input new usuariso in database (from django.contrib.auth.models import User)
     User is the database of usuarios from django
     Columns : Usuario, Senha, Nome, Sobrenome, Email, Autorizações de tabelas?
+    View to input new usuariso in database (from django.contrib.auth.models import User)
 '''
-# class CreateUserCreateView(LoginRequiredMixin, CreateView):
-#     template_name = 'create_user.html'
-#     model = User
-#     # form_class = CreateUserModelForm
-#     success_url = reverse_lazy('create_user')
+class CreateUserCreateView(CreateView):
+    template_name = 'create_user.html'
+    model = User
+    form_class = CreateUserModelForm
+    success_url = reverse_lazy('create_user')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 class ProjetosCreateView(LoginRequiredMixin, CreateView): 
     template_name = 'projetos.html' 
