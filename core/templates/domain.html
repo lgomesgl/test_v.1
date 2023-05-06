@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -8,20 +9,20 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>4uhost</title>
+      <title>Update</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
       <!-- bootstrap css -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <!-- style css -->
-      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
       <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
       <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
       <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="{% static 'https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' %}">
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -30,7 +31,7 @@
    <body class="main-layout inner_page">
       <!-- loader  -->
       <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+         <div class="loader"><img src="{% static 'images/loading.gif' %}" alt="#"/></div>
       </div>
       <!-- end loader -->
       <!-- header -->
@@ -41,7 +42,7 @@
                   <div class="full">
                      <div class="center-desk">
                         <div class="logo">
-                           <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                           <a href="index.html"><img src="{% static 'images/logo_alfa.png' %}" alt="#" /></a>
                         </div>
                      </div>
                   </div>
@@ -53,7 +54,7 @@
                      </button>
                      <div class="collapse navbar-collapse" id="navbarsExample04">
                         <ul class="navbar-nav mr-auto">
-                           <li class="nav-item">
+                           {% comment %} <li class="nav-item">
                               <a class="nav-link" href="index.html">Home</a>
                            </li>
                            <li class="nav-item">
@@ -68,17 +69,17 @@
                           
                            <li class="nav-item">
                               <a class="nav-link" href="contact.html">Contact Us</a>
-                           </li>
+                           </li> {% endcomment %}
                         </ul>
                      </div>
                   </nav>
                </div>
                <div class="col-md-2  d_none">
                   <ul class="email text_align_right">
-                     <li><a href="Javascript:void(0)"> <i class="fa fa-shopping-bag" aria-hidden="true"> <span>0</span></i>
+                     {% comment %} <li><a href="Javascript:void(0)"> <i class="fa fa-shopping-bag" aria-hidden="true"> <span>0</span></i>
                         </a>
-                     </li>
-                     <li><a href="Javascript:void(0)">Sign In
+                     </li> {% endcomment %}
+                     <li><a href="{{ link_admin }}">Sign In
                         </a>
                      </li>
                   </ul>
@@ -93,7 +94,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage text_align_center">
-                     <h2>all starts with  <span class="blue_light">a domain</span></h2>
+                     <h2>Escolha <span class="blue_light">{{ table }}</span></h2>
                   </div>
                </div>
             </div>
@@ -107,7 +108,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-md-10 offset-md-1">
+               {% comment %} <div class="col-md-10 offset-md-1">
                   <div class="domain_bg">
                      <div class="row">
                         <div class="col-sm-2">
@@ -145,7 +146,7 @@
                         </div>
                      </div>
                      <a class="read_more" href="domain.html">See More</a>
-                  </div>
+                  </div> {% endcomment %}
                </div>
             </div>
          </div>
@@ -218,9 +219,9 @@
       </footer>
       <!-- end footer -->
       <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
       <!-- sidebar -->
-      <script src="js/custom.js"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
    </body>
 </html>
