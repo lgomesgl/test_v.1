@@ -18,8 +18,10 @@ class IndexTemplateView(TemplateView):
     def get_context_data(self): # contexto para a pagina html
         context = super().get_context_data()
         context['link_admin'] = '/admin'
-        context['link_tabelas'] = '/tabelas'
         context['link_create_user'] = '/create_user'
+        context['link_about'] = '/about'
+        context['link_tabelas'] = '/tabelas'
+        context['link_usuarios'] = '/usuarios'
         context['link_projetos_form'] = '/projetos'
         context['link_empresas_form'] = '/empresas'
         context['link_pessoas_form'] = '/pessoas'
@@ -39,6 +41,15 @@ class TabelasTemplateView(TemplateView):
         context['1ink_pessoas_update'] = '/tabelas/pessoas/update'
         context['link_home'] = ''
         return context
+
+class AboutTemplateView(TemplateView):
+    template_name = 'about.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 
 # CreateView -> Create a new instance in the table
 '''
@@ -147,7 +158,11 @@ class PessoasCreateView(LoginRequiredMixin, CreateView):
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
     
-# UpdateView -> Update a instance from the table    
+# /tabelas/update
+'''
+    tabelas/update -> Pesquisar a instância que queremos modificar
+    tabelas/update/pk -> formulário para modificar a instância (pk=id)
+''' 
 class ProjetosUpTemplateView(TemplateView):
     template_name = 'domain.html'
     
@@ -155,7 +170,7 @@ class ProjetosUpTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['table'] = 'o projeto'
         context['link_admin'] = '/admin'
-        context["all_projetos"] = Projeto.objects.all()
+        context["all_instances"] = Projeto.objects.all()
         return context
 
 class EmpreasasUpTemplateView(TemplateView):
@@ -165,7 +180,7 @@ class EmpreasasUpTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['table'] = 'a empresa'
         context['link_admin'] = '/admin'
-        context["all_projetos"] = Empresas.objects.all()
+        context["all_instances"] = Empresas.objects.all()
         return context 
     
 class PessoasUpTemplateView(TemplateView):
@@ -175,5 +190,5 @@ class PessoasUpTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['table'] = 'a pessoa'
         context['link_admin'] = '/admin'
-        context["all_projetos"] = Pessoas.objects.all()
+        context["all_instances"] = Pessoas.objects.all()
         return context
