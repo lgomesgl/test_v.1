@@ -10,12 +10,12 @@ class ProjetoAdmin(admin.ModelAdmin):
     
 @admin.register(Empresas)
 class EmpresasAdmin(admin.ModelAdmin):
-    list_display = ['Nome da empresa', 'Dia de criação', 'Dia da modificação']
+    list_display = ['nome', 'Dia de criação', 'Dia da modificação']
     # list_filter = ['Nome da empresa']
-    search_fields = ['Nome da empresa']
+    search_fields = ['nome']
 
 @admin.register(Pessoas)
 class PessoasAdmin(admin.ModelAdmin):
-    list_display = ['Nome', 'Sexo', 'Cargo', 'Dia de criação', 'Dia da modificação']
-    # list_filter = ['Nome', 'Cargo']
-    search_fields = ['Nome']
+    list_display = ['nome', 'Sexo', 'Cargo', 'Dia de criação', 'Dia da modificação']
+    # list_filter = ['nome', 'Cargo']
+    search_fields = ['nome']

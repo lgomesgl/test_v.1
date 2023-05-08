@@ -27,7 +27,7 @@ class Projeto(Base):
         return self.nome
       
 class Empresas(Base):
-    nome = models.CharField(name='Nome da empresa', max_length=100, unique=True)
+    nome = models.CharField(max_length=100, unique=True)
     projeto = models.ManyToManyField(Projeto)
     
     class Meta:
@@ -52,7 +52,7 @@ class Pessoas(Base):
         ('Mestrando','Mestrando'),
     ]
     
-    nome = models.CharField(name='Nome', max_length=100)
+    nome = models.CharField(max_length=100)
     sexo = models.CharField(name='Sexo', max_length=1, choices=SEXO)
     cargo = models.CharField(name='Cargo', max_length=100, choices=CARGOS)
     projeto = models.ManyToManyField(Projeto)
