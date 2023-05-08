@@ -28,7 +28,7 @@ class IndexTemplateView(TemplateView):
         return context
 
 class TabelasTemplateView(TemplateView):
-    template_name = 'hosting.html'
+    template_name = 'tables.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -47,9 +47,10 @@ class AboutTemplateView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['link_admin'] = '/admin'
+        context['link_teste'] = ''
+        context['link_tabelas'] = '/tabelas'
         return context
-
-
 
 # CreateView -> Create a new instance in the table
 '''
@@ -164,7 +165,7 @@ class PessoasCreateView(LoginRequiredMixin, CreateView):
     tabelas/update/pk -> formulário para modificar a instância (pk=id)
 ''' 
 class ProjetosUpTemplateView(TemplateView):
-    template_name = 'domain.html'
+    template_name = 'tables_up.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -174,7 +175,7 @@ class ProjetosUpTemplateView(TemplateView):
         return context
 
 class EmpreasasUpTemplateView(TemplateView):
-    template_name = 'domain.html'
+    template_name = 'tables_up.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -184,7 +185,7 @@ class EmpreasasUpTemplateView(TemplateView):
         return context 
     
 class PessoasUpTemplateView(TemplateView):
-    template_name = 'domain.html'
+    template_name = 'tables_up.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

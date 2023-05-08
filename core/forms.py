@@ -28,7 +28,7 @@ class ProjetoModelForm(forms.ModelForm):
 class EmpresasModelForm(forms.ModelForm):
     class Meta:
         model = Empresas
-        fields = ['Nome da empresa', 'projetos']
+        fields = ['nome', 'projetos']
         
     if int(Projeto.objects.all().count()) < 5: # if size of the table is bigger then 5 choices, default the
         widget = forms.CheckboxSelectMultiple
@@ -47,7 +47,7 @@ class EmpresasModelForm(forms.ModelForm):
 class PessoasModelForm(forms.ModelForm):
     class Meta:
         model = Pessoas
-        fields = ['Nome', 'Sexo', 'Cargo', 'projetos']
+        fields = ['nome', 'Sexo', 'Cargo', 'projetos']
         
     if int(Projeto.objects.all().count()) < 5: # if size of the table is bigger then 5 choices, default the
         widget = forms.CheckboxSelectMultiple
