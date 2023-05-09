@@ -924,3 +924,8 @@ ul.conta li a {
 .hosting_page .footer {
      margin-top: 60px;
 }
+
+.table {
+     width: 50% !important; /*Importante manter o !important rs */
+     margin: auto;
+}

@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin 
-from django.views.generic import TemplateView, CreateView, UpdateView
+from django.views.generic import TemplateView, CreateView, UpdateView, DetailView
 
 from django.urls import reverse_lazy
 
@@ -12,6 +12,7 @@ from .models import Projeto, Empresas, Pessoas
     The relationship is not been save. Why?? 
     save_m2m() is not working??
 '''
+# Index
 class IndexTemplateView(TemplateView):
     template_name = 'index.html'
     
@@ -21,12 +22,48 @@ class IndexTemplateView(TemplateView):
         context['link_create_user'] = '/create_user'
         context['link_about'] = '/about'
         context['link_tabelas'] = '/tabelas'
-        context['link_usuarios'] = '/usuarios'
+        context['link_usuarios'] = '/users'
         context['link_projetos_form'] = '/projetos'
         context['link_empresas_form'] = '/empresas'
         context['link_pessoas_form'] = '/pessoas'
         return context
 
+# Usuarios
+'''
+    user page -> a page with the details of the user
+    Create a page with TemplateView, show all the instances of the table User 
+    After create a page with DetailView, for datails for each instances of the table(option)
+'''
+class UsuariosTemplateView(TemplateView):
+    template_name = 'users.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['index'] = 'home'
+        context['link_admin'] = '/admin'
+        context['link_tabelas'] = '/tabelas'
+        context['usuarios'] = User.objects.values
+        return context
+        
+# About
+'''
+    Just talk about the database and a button to show the correlations of the tables
+'''
+class AboutTemplateView(TemplateView):
+    template_name = 'about.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['link_admin'] = '/admin'
+
+        context['link_tabelas'] = '/tabelas'
+        return context
+
+# Tabelas
+'''
+    Show all the tables
+    Have links to Details/Create/Update/Delete
+'''
 class TabelasTemplateView(TemplateView):
     template_name = 'tables.html'
 
@@ -41,22 +78,10 @@ class TabelasTemplateView(TemplateView):
         context['1ink_pessoas_update'] = '/tabelas/pessoas/update'
         context['link_home'] = ''
         return context
-
-class AboutTemplateView(TemplateView):
-    template_name = 'about.html'
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['link_admin'] = '/admin'
-        context['link_teste'] = ''
-        context['link_tabelas'] = '/tabelas'
-        return context
-
-# CreateView -> Create a new instance in the table
+# Tables/create
 '''
-    User is the database of usuarios from django
-    Columns : Usuario, Senha, Nome, Sobrenome, Email
-    View to input new usuariso in database (from django.contrib.auth.models import User)
+    Display a form to create new instances for each tables
 '''
 class CreateUserCreateView(CreateView):
     template_name = 'create_user.html'
@@ -98,7 +123,6 @@ class ProjetosCreateView(LoginRequiredMixin, CreateView):
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
 
-    
 class EmpresasCreateView(LoginRequiredMixin, CreateView):
     template_name = 'empresas.html' 
     model = Empresas
@@ -159,10 +183,10 @@ class PessoasCreateView(LoginRequiredMixin, CreateView):
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
     
-# /tabelas/update
+# Tabelas/update
 '''
-    tabelas/update -> Pesquisar a instância que queremos modificar
-    tabelas/update/pk -> formulário para modificar a instância (pk=id)
+    tabelas/update -> Seach the instance for change
+    tabelas/update/pk -> Display a form to change the instance(pk = id)
 ''' 
 class ProjetosUpTemplateView(TemplateView):
     template_name = 'tables_up.html'
