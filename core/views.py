@@ -1,4 +1,3 @@
-from typing import Any, Dict
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin 
@@ -63,6 +62,8 @@ class AboutTemplateView(TemplateView):
 '''
     Show all the tables
     Have links to Details/Create/Update/Delete
+    
+    The loop in html is not working? try use forloop.counter0
 '''
 class TabelasTemplateView(TemplateView):
     template_name = 'tables.html'
@@ -77,6 +78,8 @@ class TabelasTemplateView(TemplateView):
         context['link_pessoas_form'] = '/tabelas/pessoas/create'
         context['1ink_pessoas_update'] = '/tabelas/pessoas/update'
         context['link_home'] = ''
+        context['tables'] = ('Projetos','Empresas','Pessoas')
+        context['link_form'] = {'0':'/tabelas/projetos/create','1': '/tabelas/empresas/create','2': '/tabelas/pessoas/create'}
         return context
     
 # Tables/create

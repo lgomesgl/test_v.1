@@ -3,9 +3,9 @@ from .views import IndexTemplateView, TabelasTemplateView, CreateUserCreateView,
 
 urlpatterns = [
     path('', IndexTemplateView.as_view(), name='index'),
-    path('tabelas', TabelasTemplateView.as_view(), name='tabelas'),
     path('create_user/', CreateUserCreateView.as_view(), name='create_user'),
     path('about/', AboutTemplateView.as_view(), name='about'),
+    path('tabelas', TabelasTemplateView.as_view(), name='tabelas'),
     path('users', UsuariosTemplateView.as_view(), name='users'),
     path('tabelas/projetos/create', ProjetosCreateView.as_view(), name='projetos'),
     path('tabelas/projetos/update', ProjetosUpTemplateView.as_view(), name='projetos_update'),

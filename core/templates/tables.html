@@ -101,15 +101,16 @@
                </div>
             </div>
             <div class="row">
+               {% for table in tables %}
                <div class="col-md-4">
                   <div id="ho_co" class="order-box_main">
                      <div class="order-box text_align_center">
                         {% comment %} <h3><a href="{{ link_projetos_form }}">Projetos</a></h3> {% endcomment %}
-                        <h3>Projetos</h3>
+                        <h3>{{ table }}</h3>
                         {% comment %} <p>STARTING  <span>$9</span> PER MONTH</p> {% endcomment %}
                         {% comment %} <a href="{{ link_projetos_form }}">Personal use</a> {% endcomment %}
                         <ul class="supp">
-                           <li> <a href="{{ link_projetos_form }}">Adicionar</a> </li>
+                           <li> <a href="{{ link_projetos_form }}">Adicionar</a> </li> <!-- How to fiz that?? forloop.counter0 ?-->
                            <li> <a href="{{ link_projetos_update }}">Modificar</a></li>
                            <li> <a href="">Deletar</a> </li>
                            {% comment %} <li>Unlimited projects</li>
@@ -119,40 +120,7 @@
                      {% comment %} <a class="read_more" href="Javascript:void(0)">Buy Now</a> {% endcomment %}
                   </div>
                </div>
-               <div class="col-md-4">
-                  <div id="ho_co" class="order-box_main">
-                     <div class="order-box text_align_center">
-                        <h3>Empresas</h3>
-                        {% comment %} <p>STARTING  <span>$9</span> PER MONTH</p> {% endcomment %}
-                        {% comment %} <a href="Javascript:void(0)">Personal use</a> {% endcomment %}
-                        <ul class="supp">
-                           <li> <a href="{{ link_empresas_form }}">Adicionar</a></li>
-                           <li> <a href="{{ link_emprasas_update }}">Modificar</a></li>
-                           <li> <a href="">Deletar</a> </li>
-                           {% comment %} <li>Unlimited projects</li>
-                           <li>24/7 support</li> {% endcomment %}
-                        </ul>
-                     </div>
-                     {% comment %} <a class="read_more" href="Javascript:void(0)">Buy Now</a> {% endcomment %}
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div id="ho_co" class="order-box_main">
-                     <div class="order-box text_align_center">
-                        <h3>Pessoas</h3>
-                        {% comment %} <p>STARTING  <span>$9</span> PER MONTH</p> {% endcomment %}
-                        {% comment %} <a href="Javascript:void(0)">Personal use</a> {% endcomment %}
-                        <ul class="supp">
-                           <li> <a href="{{ link_pessoas_form }}">Adicionar</a></li>
-                           <li> <a href="{{ 1ink_pessoas_update }}">Modificar</a></li>
-                           <li> <a href="">Deletar</a> </li>
-                           {% comment %} <li>Unlimited projects</li>
-                           <li>24/7 support</li> {% endcomment %}
-                        </ul>
-                     </div>
-                     {% comment %} <a class="read_more" href="Javascript:void(0)">Buy Now</a> {% endcomment %}
-                  </div>
-               </div>
+               {% endfor %}
             </div>
          </div>
       </div>
